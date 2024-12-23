@@ -117,6 +117,7 @@ import {
     ReadCallFunctionDto,
     WriteCallFunctionResponseDto,
     ContractAbiResponseDto,
+    TransactionReceiptResponseDto,
     DeployedContractResponseDto,
     LeanDeployedContractResponseDto,
     ParameterWithValueList,
@@ -2054,6 +2055,17 @@ export class FireblocksSDK {
      */
     public async writeContractCallFunction(baseAssetId: string, contractAddress: string, payload: WriteCallFunctionDto): Promise<WriteCallFunctionResponseDto> {
         return await this.apiClient.issuePostRequest(`/v1/contract_interactions/base_asset_id/${baseAssetId}/contract_address/${contractAddress}/functions/write`, payload);
+    }
+
+    /**
+     * Get transaction receipt by blockchain base assetId and transaction hash
+     * @param baseAssetId
+     * @param txHash
+     *
+     * @returns TransactionReceiptResponseDto
+     */
+    public async getTransactionReceipt(baseAssetId: string, txHash: string): Promise<TransactionReceiptResponseDto> {
+        return await this.apiClient.issueGetRequest(`/v1/contract_interactions/base_asset_id/${baseAssetId}/tx_hash/${txHash}/receipt`);
     }
 
     /**
